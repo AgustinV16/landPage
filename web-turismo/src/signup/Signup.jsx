@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import "./signup.css";
 import { Link, useNavigate } from "react-router-dom";
+import { Container, Navbar } from "react-bootstrap";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlane} from '@fortawesome/free-solid-svg-icons';
 
 const Signup = () => {
 
@@ -28,6 +31,16 @@ const Signup = () => {
 
   return (
     <div className="body">
+      <Navbar className=" color">
+        <Container>
+          <Navbar.Brand>
+            <Link to={'/'} style={{textDecoration: 'none', color: 'black'}}>
+            <FontAwesomeIcon icon={faPlane} rotation={50} size="xl" style={{color: "#ff7800",}} />4
+            Atlas
+            </Link>
+          </Navbar.Brand>
+        </Container>
+      </Navbar>
       <div className="addUser">
         <h3>
           Bienvenido a <i>Atlas</i>
