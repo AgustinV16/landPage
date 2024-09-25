@@ -11,7 +11,7 @@ function App() {
   return (
 
     <div className="backgroundColor">
-      <Router>
+      <Router basename='/landPage'>
       <Routes>
         {/* Rutas que usan el layout común */}
         <Route path="/" element={<MainLayout/>} />
