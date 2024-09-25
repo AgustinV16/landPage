@@ -1,3 +1,45 @@
-body {
-  background-color: rgb(236, 236, 236);
+
+
+.imageHeight{
+  height: 20%!important;
 }
+
+.color{
+  background: linear-gradient(to left, rgb(255, 148, 115), rgb(197, 153, 247));
+}
+
+.colorPurple{
+  background-color: rgb(108, 56, 253);
+  color: rgb(255, 255, 255);
+}
+
+.iconCustom{
+  padding-left: 10px;
+}
+
+.backgroundColor{
+  background-color: #c5bce7;
+}
+
+/* Mostrar solo el ícono en pantallas pequeñas entre 779px y 991px */
+@media (min-width: 779px) and (max-width: 991px) {
+  .button-text {
+    display: none; /* Ocultamos el texto en este rango */
+  }
+}
+
+/* Mostrar ícono + texto en pantallas más pequeñas de 779px */
+@media (max-width: 778px) {
+  .button-text {
+    display: inline; /* Mostrar el texto junto con el icono */
+  }
+}
+
+
+/* Mostrar ícono + texto en pantallas más grandes de 991px */
+@media (min-width: 992px) {
+  .button-text {
+    display: inline; /* Mostrar el texto junto con el icono */
+  }
+}
+

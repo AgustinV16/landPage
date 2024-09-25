@@ -1,4 +1,9 @@
 @media (min-width: 768px) {
+  
+  .body, body {
+    background-color: rgb(236, 236, 236);
+  }
+
   .addUser {
     background-color: white;
     width: 40%;
@@ -34,6 +39,10 @@
   
   .addUserForm .inputGroup input::placeholder {
     color: black;
+  }
+
+  .inputGroup {
+    text-decoration: none;
   }
   
   .inputGroup button {
@@ -83,6 +92,11 @@
 }
 
 @media (max-width: 760px) {
+
+  .body, body {
+    background-color: rgb(236, 236, 236);
+  }
+
   .addUser {
     background-color: white;
     width: 75%;
@@ -120,6 +134,10 @@
     color: black;
   }
   
+  .inputGroup {
+    text-decoration: none;
+  }
+
   .inputGroup button {
     margin-top: 20px;
     border-radius: 10px;
