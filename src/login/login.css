@@ -1,0 +1,185 @@
+@media (min-width: 768px) {
+  
+  .body, body {
+    background-color: rgb(236, 236, 236);
+  }
+
+  .addUser {
+    background-color: white;
+    width: 40%;
+    margin: 50px auto;
+    /* margin in top and bottom will be 50px  */
+    /* left and right auto  */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
+  
+    /* horizon offset vertical offset blur offset  */
+    /* opacity of shadow */
+    /* red, green, blue, and (opacity ). */
+  }
+  .addUserForm .inputGroup {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .addUserForm .inputGroup label {
+    margin-top: 10px;
+  }
+  
+  .addUserForm .inputGroup input {
+    margin-top: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: gainsboro;
+    
+  }
+  
+  .addUserForm .inputGroup input::placeholder {
+    color: black;
+  }
+
+  .inputGroup {
+    text-decoration: none;
+  }
+  
+  .inputGroup button {
+    margin-top: 20px;
+    border-radius: 10px;
+    background-color: blueviolet;
+    color: white;
+  }
+  
+  .inputGroup button:hover {
+    background-color: rgb(166, 92, 235);
+    color: white;
+  }
+  
+  .inputGroup button:active {
+    background-color: rgb(166, 92, 235);
+    color: white;
+  }
+  
+  .login {
+    margin-top: 30px;
+    text-align: center;
+  }
+  
+  .login .btn {
+    width: 50%;
+    text-align: center;
+    background-color: rgb(255, 145, 0);
+    color: white;
+  }
+  
+  
+  .addUser h3 {
+    text-align: center;
+    color: rgb(158, 158, 158);
+  }
+  
+  .addUser h3 i {
+    color: rgb(255, 145, 0);
+  }
+  
+  .addUser h4 {
+    text-align: center;
+    padding: 20px;
+    color: rgb(208, 165, 248);
+  }
+}
+
+@media (max-width: 760px) {
+
+  .body, body {
+    background-color: rgb(236, 236, 236);
+  }
+
+  .addUser {
+    background-color: white;
+    width: 75%;
+    margin: 50px auto;
+    /* margin in top and bottom will be 50px  */
+    /* left and right auto  */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
+  
+    /* horizon offset vertical offset blur offset  */
+    /* opacity of shadow */
+    /* red, green, blue, and (opacity ). */
+  }
+  .addUserForm .inputGroup {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .addUserForm .inputGroup label {
+    margin-top: 10px;
+  }
+  
+  .addUserForm .inputGroup input {
+    margin-top: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: gainsboro;
+    
+  }
+  
+  .addUserForm .inputGroup input::placeholder {
+    color: black;
+  }
+  
+  .inputGroup {
+    text-decoration: none;
+  }
+
+  .inputGroup button {
+    margin-top: 20px;
+    border-radius: 10px;
+    background-color: blueviolet;
+    color: white;
+  }
+  
+  .inputGroup button:hover {
+    background-color: rgb(166, 92, 235);
+    color: white;
+  }
+  
+  .inputGroup button:active {
+    background-color: rgb(166, 92, 235);
+    color: white;
+  }
+  
+  .login {
+    margin-top: 30px;
+    text-align: center;
+  }
+  
+  .login .btn {
+    width: 50%;
+    text-align: center;
+    background-color: rgb(255, 145, 0);
+    color: white;
+  }
+  
+  
+  .addUser h3 {
+    text-align: center;
+    color: rgb(158, 158, 158);
+  }
+  
+  .addUser h3 i {
+    color: rgb(255, 145, 0);
+  }
+  
+  .addUser h4 {
+    text-align: center;
+    padding: 20px;
+    color: rgb(208, 165, 248);
+  }
+}
