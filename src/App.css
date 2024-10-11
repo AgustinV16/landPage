@@ -1,0 +1,110 @@
+
+
+.fotoPequeña{
+  height: 171px;
+  width: 180px;
+}
+
+.color{
+  background: linear-gradient(to left, rgb(255, 148, 115), rgb(197, 153, 247));
+}
+
+.colorPurple{
+  background-color: rgb(108, 56, 253);
+  color: rgb(255, 255, 255);
+}
+
+.colorPurpleFooter{
+  background-color: rgb(108, 56, 253);
+  color: #fff; 
+  
+}
+
+.iconCustom{
+  padding-left: 10px;
+}
+
+.backgroundColor{
+  background-color: #c5bce7;
+  
+}
+
+
+/* Estilos Seccion de Favoritos En y Resultados de busquedas */
+.fotoCard{
+  width: 180px;
+}
+.backgroundColorSeccion{
+  background-color: #fff;
+  border-radius: 15px;
+}
+
+.hotel-card {
+  width: 100%;
+  max-width: 540px;
+  height: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.hotel-card-price {
+  background-color: #e0f5e9;
+  border-radius: 8px;
+  padding: 10px;
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.hotel-price-text {
+  color: #28a745;
+  margin-bottom: 8px;
+  text-align: right;
+  font-size: 1.5rem;
+}
+
+
+.hotel-card-button {
+  width: 100%;
+}
+
+
+.hotel-card-container {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center;
+}
+
+
+
+/* Estilos responsive */
+@media (max-width: 992px) {
+  .hotel-card {
+    flex-direction: row; 
+    width: 100%;
+  }
+
+ 
+}
+
+/* Mostrar solo el ícono en pantallas pequeñas entre 779px y 991px */
+@media (min-width: 779px) and (max-width: 991px) {
+  .button-text {
+    display: none; 
+  }
+}
+
+/* Mostrar ícono + texto en pantallas más pequeñas de 779px */
+@media (max-width: 778px) {
+  .button-text {
+    display: inline;
+  }
+}
+
+/* Mostrar ícono + texto en pantallas más grandes de 991px */
+@media (min-width: 992px) {
+  .button-text {
+    display: inline;
+  }
+}
