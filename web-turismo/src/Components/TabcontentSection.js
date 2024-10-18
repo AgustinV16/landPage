@@ -6,6 +6,7 @@ import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
 import TurismDefault from '../images/Turismo.jpg';
 import defaultImage from '../images/Default.jpg';
 
+
 function TabsContent() {
   // Estados para ambos modales
   const [showImageModal, setShowImageModal] = useState(false);
@@ -13,7 +14,15 @@ function TabsContent() {
   const handleCloseImage = () => setShowImageModal(false);
   const handleShowImage = () => setShowImageModal(true);
   const handleClosePassword = () => setShowPasswordModal(false);
-  const handleShowPassword = () => setShowPasswordModal(true);
+  const handleShowPassword = () => {
+    setShowPasswordModal(true);
+
+    // Simulacion de confirmacion de correo
+    setTimeout(()=> {
+      setShowPasswordModal(false)
+      navigate('/change-password')
+    }, 1800)
+  }
 
   // Estado para loading de guardar cambios
   const [isLoading, setLoading] = useState(false);
@@ -41,10 +50,31 @@ function TabsContent() {
   ];
 
   const toggleLike = (index) => {
-    const newLikedCards = [...likedCards];
-    newLikedCards[index] = !newLikedCards[index];
-    setLikedCards(newLikedCards);
+    const updatedFavorites = likedCards.filter((_, idx) => idx !== index);
+    setLikedCards(updatedFavorites);
+    localStorage.setItem('favoriteHotels', JSON.stringify(updatedFavorites));
   };
+
+  //Obtine los favoritos de localStorage
+  useEffect(() => {
+    const storedFavorites = JSON.parse(localStorage.getItem('favoriteHotels')) || [];
+    setLikedCards(storedFavorites);
+  }, []);
+
+  //Sincronizacion con la pestaña favoritos
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const storedFavorites = JSON.parse(localStorage.getItem('favoriteHotels')) || [];
+      setLikedCards(storedFavorites);
+    };
+  
+    window.addEventListener('storage', handleStorageChange);
+    
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
+  
     //Para renderizar cantidad de estrellas
   const renderStars = (count) => {
     return Array.from({ length: count }).map((_, index) => (
@@ -59,6 +89,56 @@ function TabsContent() {
     navigate('/');
   };
 
+  // Name y Email del localStorage
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+
+  // Estado para almacenar la imagen subida
+  const [profileImage, setProfileImage] = useState(defaultImage);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  // User localStorage
+
+  useEffect(()=>{
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    if (storedUser) {
+      setName(storedUser.name || '');
+      setEmail(storedUser.email || '');
+      if (storedUser.profileImage) {
+        setProfileImage(storedUser.profileImage); // Si hay imagen en localStorage
+      }
+    }
+  }, []);
+  
+   // Función para manejar la selección de una imagen
+   const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setSelectedImage(reader.result);
+      };
+      reader.readAsDataURL(file); // Datos base64
+    }
+  };
+
+
+  // Función para guardar los cambios en el localStorage
+  const handleSaveChanges = () => {
+    const updatedUser = { name, email, profileImage: selectedImage||profileImage };
+    localStorage.setItem('user', JSON.stringify(updatedUser));
+    setProfileImage(selectedImage || profileImage)
+    setLoading(true);
+
+    // Simular la demora de guardar cambios
+    setTimeout(() => {
+      setLoading(false); // Desactivar el estado de carga
+    }, 1000);
+  };
+
+
+
   return (
     <div className="p-5 mb-5 backgroundColor">
       {/* Redirige la pag hacia atras => Main */}
@@ -69,7 +149,7 @@ function TabsContent() {
 
       {/* Comienzo del panel*/}
 
-      <Tab.Container id="left-tabs-example" defaultActiveKey="first" className="backgroundColorSeccion">
+      <Tab.Container id="left-tabs-example" defaultActiveKey="first" className="backgroundColorSeccion" >
         
         <Row className="backgroundColorSeccion mb-5 p-2" >
           <h2>Mi Perfil</h2>
@@ -93,7 +173,7 @@ function TabsContent() {
                 {/* Imagen del perfil */}
                 <p>Foto de perfil</p>
                 <Col xs={5} md={4}>
-                  <Image src={defaultImage} alt="Foto de perfil" className="fotoPequeña mb-3" roundedCircle />
+                  <Image src={profileImage} alt="Foto de perfil" className="fotoPequeña mb-3" roundedCircle />
                 </Col>
                 {/* Formulario */}
                 <Form>
@@ -108,9 +188,16 @@ function TabsContent() {
                       <Form>
                         <Form.Group controlId="formFile" className="mb-3">
                           <Form.Label>Sube la imagen</Form.Label>
-                          <Form.Control type="file" />
+                          <Form.Control type="file" onChange={handleImageChange}/>
                         </Form.Group>
                       </Form>
+                      {/* Previsualización de la imagen seleccionada */}
+                      {selectedImage && (
+                        <div className="text-center">
+                          <p>Previsualización:</p>
+                          <Image src={selectedImage} alt="Previsualización" roundedCircle style={{ width: '150px', height: '150px' }} />
+                        </div>
+                      )}
                     </Modal.Body>
                     <Modal.Footer>
                       <Button variant="secondary" onClick={handleCloseImage}>
@@ -127,7 +214,7 @@ function TabsContent() {
                     <Col>
                       <Form.Group className="mb-3">
                         <Form.Label>Nombre</Form.Label>
-                        <Form.Control placeholder="Nombre" />
+                        <Form.Control value={name} onChange={(e)=> {setName(e.target.value)}} placeholder={name} />
                       </Form.Group>
                     </Col>
                     {/* Monedas */}
@@ -145,7 +232,7 @@ function TabsContent() {
                   {/* Email */}
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Email</Form.Label>
-                    <Form.Control type="email" placeholder="nombre@ejemplo.com" />
+                    <Form.Control type="email" value={email} onChange={(e)=>{setEmail(e.target.value)}} placeholder={email} />
                   </Form.Group>
 
                   {/* Botón para cambiar contraseña */}
@@ -156,7 +243,7 @@ function TabsContent() {
                   {/* Modal para cambiar la contraseña */}
                   <Modal show={showPasswordModal} onHide={handleClosePassword}>
                     <Modal.Body>
-                      <p>Se ha enviado un correo a NombreDelCorreo@correo.com, por favor revisar</p>
+                      <p>Se ha enviado un correo a {email}, al darle a confirmar se te redirigirá a una pagina para restablecer tu contraseña</p>
                     </Modal.Body>
                     <Modal.Footer>
                       <Button variant="secondary" onClick={handleClosePassword}>
@@ -167,7 +254,7 @@ function TabsContent() {
 
                   {/* Botón para guardar cambios */}
                   <Col>
-                    <Button className="mb-3 colorPurple" disabled={isLoading} onClick={!isLoading ? handleClick : null}>
+                    <Button className="mb-3 colorPurple" disabled={isLoading} onClick={handleSaveChanges}>
                       {isLoading ? 'Guardando…' : 'Guardar Cambios'}
                     </Button>
                   </Col>
@@ -178,11 +265,11 @@ function TabsContent() {
               <Tab.Pane eventKey="second">
                 <Container fluid="md" className="d-flex justify-content-center mb-5">
                   <Row xs={1} md={1} lg={1} className="g-4 justify-content-center">
-                    {hotels
-                      .map((hotel, idx) => ({ ...hotel, liked: likedCards[idx], index: idx }))
-                      .filter(hotel => hotel.liked)
-                      .map((hotel) => (
-                        <Col key={hotel.index} className="d-flex justify-content-center">
+                    {likedCards.length === 0 ? (
+                      <p>No tienes hoteles favoritos aún.</p>
+                    ) : (
+                      likedCards.map((hotel, idx) => (
+                        <Col key={idx} className="d-flex justify-content-center">
                           <Card className="hotel-card">
                             <Stack direction="horizontal" className="align-items-center justify-content-between" gap={3}>
                               {/* Imagen del hotel */}
@@ -194,10 +281,10 @@ function TabsContent() {
                               <div className="p-2 flex-grow-1">
                                 <p>{hotel.name}</p>
                                 <div>{renderStars(hotel.stars)}</div>
-                                {/* Ícono del corazón */}
+                                {/* Botón de eliminar de favoritos */}
                                 <FontAwesomeIcon
                                   icon={faHeart}
-                                  onClick={() => toggleLike(hotel.index)}
+                                  onClick={() => toggleLike(idx)} // Eliminar de favoritos
                                   style={{ color: "#e02e2e", cursor: "pointer" }}
                                 />
                               </div>
@@ -211,10 +298,13 @@ function TabsContent() {
                             </Stack>
                           </Card>
                         </Col>
-                      ))}
+                      ))
+                    )}
                   </Row>
                 </Container>
               </Tab.Pane>
+
+
 
               
             </Tab.Content>

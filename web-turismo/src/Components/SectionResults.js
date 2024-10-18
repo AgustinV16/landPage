@@ -16,10 +16,22 @@ export default function SectionResults() {
   ];
   {/* Funcionalidad a los Favoritos */}
   const toggleLike = (index) => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    
+    if (!user) {
+      alert('Por favor, inicia sesión para agregar a favoritos.');
+      return;
+    }
+  
     const newLikedCards = [...likedCards];
     newLikedCards[index] = !newLikedCards[index];
     setLikedCards(newLikedCards);
+  
+    // Almacenar los favoritos en el localStorage
+    const favoriteHotels = hotels.filter((_, idx) => newLikedCards[idx]);
+    localStorage.setItem('favoriteHotels', JSON.stringify(favoriteHotels));
   };
+  
   {/* Renderizador de cantidad de estrellas */}
   const renderStars = (count) => {
     return Array.from({ length: count }).map((_, index) => (
