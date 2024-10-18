@@ -7,6 +7,7 @@ import Login from './login/Login';
 import MainLayout from './Main/MainLayout';
 import Profile from './Profile/Profile';
 import ResultSearch from './ResultSearch/ResultSearch';
+import ChangePassword from './Components/ChangePass';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
         <Route path='/signup' element={<Signup></Signup>} />
         
         <Route path='/profile' element={<Profile></Profile>} />
+        <Route path='/change-password' element={<ChangePassword></ChangePassword>} />
         <Route path='/resultSearch' element={<ResultSearch></ResultSearch>} />
       </Routes>
     </Router>

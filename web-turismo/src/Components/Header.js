@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Container, Button, ButtonGroup, Navbar, Dropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -7,9 +7,21 @@ import { faPlane, faUser } from '@fortawesome/free-solid-svg-icons';
 function Header() {
 
   const [user, setUser] = useState(null); //Almacena el nombre de usuario
+  const [profileImage, setProfileImage] = useState(null);
 
   // Funcionalidad del boton login
   const navigate = useNavigate();
+
+  const navLogo = () => {
+    // Limpia los datos de la barra de búsqueda del localStorage
+    localStorage.removeItem('origin');
+    localStorage.removeItem('destination');
+    localStorage.removeItem('startDate');
+    localStorage.removeItem('endDate');
+    localStorage.removeItem('passengers');
+    localStorage.removeItem('transport');
+    navigate('/')
+  }
 
   const handleLoginClick = () => {
     navigate('/login');
@@ -30,6 +42,7 @@ function Header() {
     const storedUser = JSON.parse(localStorage.getItem('user'));
     if (storedUser && storedUser.name) {
       setUser(storedUser.name); // Guardar el nombre del usuario si existe
+      setProfileImage(storedUser.profileImage || null);
     }
   }, []); // Solo se ejecuta una vez al montar el componente
 
@@ -38,8 +51,8 @@ function Header() {
       {/* Header MAIN */}
       <Navbar className="bg-body-tertiary color">
         <Container>
-          <Navbar.Brand href="#home">
-          <FontAwesomeIcon icon={faPlane} rotation={50} size="xl" style={{color: "#ff7800",}} />4
+          <Navbar.Brand onClick={navLogo} style={{ cursor: 'pointer' }}>
+            <FontAwesomeIcon icon={faPlane} rotation={50} size="xl" style={{color: "#ff7800",}} />4
             Atlas
           </Navbar.Brand>
           
@@ -60,8 +73,16 @@ function Header() {
             {/* Botón de Iniciar Sesión o Nombre de usuario*/}
             {user ? (
               <Button variant="light">
+                {profileImage ? (
+                  <img 
+                    src={profileImage} 
+                    alt="Foto de perfil" 
+                    style={{ width: '30px', height: '30px', borderRadius: '50%', marginRight: '8px' }} 
+                  />
+                ) : (
+                  <FontAwesomeIcon className="ms-2" icon={faUser} size="lg" style={{ color: "#c0bfbc", marginRight: '8px' }} />
+                )}
                 {user}
-                <FontAwesomeIcon className="ms-2" icon={faUser} size="lg" style={{ color: "#c0bfbc" }} />
               </Button>
             ) : (
               <Button onClick={handleLoginClick} variant="light">
