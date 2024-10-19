@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/landPage/static/css/main.add71fbe.css",
+    "main.js": "/landPage/static/js/main.c837bff6.js",
+    "static/media/image1.png": "/landPage/static/media/image1.9bdfa742c933e7f8680c.png",
+    "static/media/Turismo.jpg": "/landPage/static/media/Turismo.a6a722401ff584358ff9.jpg",
+    "index.html": "/landPage/index.html",
+    "main.add71fbe.css.map": "/landPage/static/css/main.add71fbe.css.map",
+    "main.c837bff6.js.map": "/landPage/static/js/main.c837bff6.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.add71fbe.css",
+    "static/js/main.c837bff6.js"
+  ]
+}
