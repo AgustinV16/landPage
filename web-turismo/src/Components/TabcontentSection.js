@@ -264,34 +264,44 @@ function TabsContent() {
               {/* Segundo Panel: Favoritos */}
               <Tab.Pane eventKey="second">
                 <Container fluid="md" className="d-flex justify-content-center mb-5">
-                  <Row xs={1} md={1} lg={1} className="g-4 justify-content-center">
+                  <Row xs={1} sm={2} md={3} lg={4} className="g-4 justify-content-center">
                     {likedCards.length === 0 ? (
                       <p>No tienes hoteles favoritos aún.</p>
                     ) : (
                       likedCards.map((hotel, idx) => (
                         <Col key={idx} className="d-flex justify-content-center">
                           <Card className="hotel-card">
-                            <Stack direction="horizontal" className="align-items-center justify-content-between" gap={3}>
+                            <Stack direction="vertical" className="align-items-center justify-content-between" gap={3}>
                               {/* Imagen del hotel */}
                               <div className="p-2">
-                                <Image src={TurismDefault} alt="Foto de ejemplo" rounded fluid className="fotoCard" />
+                                <Image
+                                  src={TurismDefault}
+                                  alt="Foto de ejemplo"
+                                  fluid
+                                  className="fotoCard"
+                                  style={{ width: "100%", height: "auto" }} // Hacer que la imagen sea responsiva
+                                />
                               </div>
 
                               {/* Datos del hotel */}
-                              <div className="p-2 flex-grow-1">
-                                <p>{hotel.name}</p>
-                                <div>{renderStars(hotel.stars)}</div>
+                              <div className="p-2 flex-grow-1 text-center">
+                                <p className="hotel-name">{hotel.name}</p>
+                                <div className="hotel-stars">{renderStars(hotel.stars)}</div>
                                 {/* Botón de eliminar de favoritos */}
                                 <FontAwesomeIcon
                                   icon={faHeart}
-                                  onClick={() => toggleLike(idx)} // Eliminar de favoritos
+                                  onClick={() => toggleLike(idx)}
                                   style={{ color: "#e02e2e", cursor: "pointer" }}
                                 />
                               </div>
 
-                              {/*botón */}
+                              {/* Botón de ver oferta */}
                               <div className="p-2 hotel-card-price">
-                                <Button variant="success" className="hotel-card-button">
+                                <Button
+                                  variant="success"
+                                  className=" hotel-card-button"
+                                  style={{ width: "100%" }} // Botón de tamaño completo
+                                >
                                   Ver oferta
                                 </Button>
                               </div>
